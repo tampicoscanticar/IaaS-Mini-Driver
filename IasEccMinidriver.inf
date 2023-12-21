@@ -1,0 +1,253 @@
+;
+;IDEMIA IAS-ECC Smartcard Minidriver for an x86 and x64 based package.
+;
+
+[Version]
+Signature="$Windows NT$"
+Class=SmartCard
+ClassGuid={990A2BD7-E738-46c7-B26F-1CF8FB9F1391}
+Provider=%FABRIKAMVENDOR%
+CatalogFile=IasEccMiniDriver.cat
+DriverVer=10/22/2018,2.4.10.158
+
+[Manufacturer]
+%FABRIKAMVENDOR%=Minidriver,NTamd64,NTamd64.6.1,NTx86,NTx86.6.1
+
+[Minidriver.NTamd64]
+%FabrikamCardDeviceName%=Minidriver64_Install,SCFILTER\CID_80F9A000000077010800079000
+%FabrikamCardDeviceName%=Minidriver64_Install,SCFILTER\CID_A000000077010800079000
+%FabrikamCardDeviceName%=Minidriver64_Install,SCFILTER\CID_7CC3B6B2-D0E5-4CC9-911A-EA3A6189DCC1
+
+[Minidriver.NTx86]
+%FabrikamCardDeviceName%=Minidriver32_Install,SCFILTER\CID_80F9A000000077010800079000
+%FabrikamCardDeviceName%=Minidriver32_Install,SCFILTER\CID_A000000077010800079000
+%FabrikamCardDeviceName%=Minidriver32_Install,SCFILTER\CID_7CC3B6B2-D0E5-4CC9-911A-EA3A6189DCC1
+
+[Minidriver.NTamd64.6.1]
+%FabrikamCardDeviceName%=Minidriver64_61_Install,SCFILTER\CID_80F9A000000077010800079000
+%FabrikamCardDeviceName%=Minidriver64_61_Install,SCFILTER\CID_A000000077010800079000
+%FabrikamCardDeviceName%=Minidriver64_61_Install,SCFILTER\CID_7CC3B6B2-D0E5-4CC9-911A-EA3A6189DCC1
+
+[Minidriver.NTx86.6.1]
+%FabrikamCardDeviceName%=Minidriver32_61_Install,SCFILTER\CID_80F9A000000077010800079000
+%FabrikamCardDeviceName%=Minidriver32_61_Install,SCFILTER\CID_A000000077010800079000
+%FabrikamCardDeviceName%=Minidriver32_61_Install,SCFILTER\CID_7CC3B6B2-D0E5-4CC9-911A-EA3A6189DCC1
+
+[SourceDisksFiles]
+IasEccMiniDriver64.dll=1
+IasEccMiniDriver.dll=1
+
+[SourceDisksNames]
+1 = %MediaDescription%
+
+[Minidriver64_Install.NT]
+CopyFiles=amd64_CopyFiles
+CopyFiles=wow64_CopyFiles
+AddReg=AddRegWOW64
+AddReg=AddRegDefault64
+
+[Minidriver64_61_Install.NT]
+CopyFiles=amd64_CopyFiles
+CopyFiles=wow64_CopyFiles
+AddReg=AddRegWOW64
+AddReg=AddRegDefault64
+Include=umpass.inf
+Needs=UmPass
+
+
+[Minidriver32_Install.NT]
+CopyFiles=x86_CopyFiles
+AddReg=AddRegDefault
+
+[Minidriver32_61_Install.NT]
+CopyFiles=x86_CopyFiles
+AddReg=AddRegDefault
+Include=umpass.inf
+Needs=UmPass
+
+
+[Minidriver64_Install.NT.Services]
+Include=umpass.inf
+Needs=UmPass.Services
+
+ 
+[Minidriver32_Install.NT.Services]
+Include=umpass.inf
+Needs=UmPass.Services
+
+
+[Minidriver64_61_Install.NT.Services]
+Include=umpass.inf
+Needs=UmPass.Services
+
+
+[Minidriver32_61_Install.NT.Services]
+Include=umpass.inf
+Needs=UmPass.Services
+
+
+[UMPassService_Install]
+DisplayName    = %umpass.SVCDESC%     ; Friendly Name of the Service
+ServiceType    = 1                    ; SERVICE_KERNEL_DRIVER
+StartType      = 3                    ; SERVICE_DEMAND_START 
+ErrorControl   = 1                    ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\umpass.sys
+LoadOrderGroup = Extended Base
+
+
+[Minidriver64_61_Install.NT.HW]
+Include=umpass.inf
+Needs=UmPass.HW
+
+[Minidriver64_61_Install.NT.CoInstallers]
+Include=umpass.inf
+Needs=UmPass.CoInstallers
+
+
+[Minidriver64_61_Install.NT.Interfaces]
+Include=umpass.inf
+Needs=UmPass.Interfaces
+
+
+[Minidriver32_61_Install.NT.HW]
+Include=umpass.inf
+Needs=UmPass.HW
+
+[Minidriver32_61_Install.NT.CoInstallers]
+Include=umpass.inf
+Needs=UmPass.CoInstallers
+
+
+[Minidriver32_61_Install.NT.Interfaces]
+Include=umpass.inf
+Needs=UmPass.Interfaces
+
+
+[amd64_CopyFiles]
+IasEccMiniDriver64.dll
+
+[x86_CopyFiles]
+IasEccMiniDriver.dll
+
+[wow64_CopyFiles]
+IasEccMiniDriver.dll
+
+[AddRegWOW64]
+HKLM, %SmartCardNameWOW64_T0%
+HKLM, %SmartCardNameWOW64_T0%,"ATR",0x00000001,3B,5B,96,00,A0,00,00,00,77,01,08,00,07,90,00
+HKLM, %SmartCardNameWOW64_T0%,"ATRMask",0x00000001,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff
+HKLM, %SmartCardNameWOW64_T0%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardNameWOW64_T0%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardNameWOW64_T0%,"80000001",0x00000000,%SmartCardCardModule%
+HKLM, %SmartCardNameWOW64_T0%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardNameWOW64_T0%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardNameWOW64_T0%,"EnablePinPad",0x00010001,0
+
+
+HKLM, %SmartCardNameWOW64%
+HKLM, %SmartCardNameWOW64%,"ATR",0x00000001,3B,00,00,00,81,31,FE,45,80,F9,A0,00,00,00,77,01,08,00,07,90,00,00
+HKLM, %SmartCardNameWOW64%,"ATRMask",0x00000001,ff,00,00,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,00
+HKLM, %SmartCardNameWOW64%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardNameWOW64%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardNameWOW64%,"80000001",0x00000000,%SmartCardCardModule%
+HKLM, %SmartCardNameWOW64%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardNameWOW64%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardNameWOW64%,"EnablePinPad",0x00010001,0
+
+HKLM, %SmartCardNameSIBSWOW64%
+HKLM, %SmartCardNameSIBSWOW64%,"ATR",0x00000001,3B,6B,00,00,00,31,C0,64,1F,18,01,00,0F,90,00
+HKLM, %SmartCardNameSIBSWOW64%,"ATRMask",0x00000001,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF
+HKLM, %SmartCardNameSIBSWOW64%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardNameSIBSWOW64%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardNameSIBSWOW64%,"80000001",0x00000000,%SmartCardCardModule%
+HKLM, %SmartCardNameSIBSWOW64%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardNameSIBSWOW64%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardNameSIBSWOW64%,"EnablePinPad",0x00010001,0
+
+[AddRegDefault]
+HKLM, %SmartCardName_T0%
+HKLM, %SmartCardName_T0%,"ATR",0x00000001,3B,5B,96,00,A0,00,00,00,77,01,08,00,07,90,00
+HKLM, %SmartCardName_T0%,"ATRMask",0x00000001,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff
+HKLM, %SmartCardName_T0%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardName_T0%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardName_T0%,"80000001",0x00000000,%SmartCardCardModule%
+HKLM, %SmartCardName_T0%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardName_T0%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardName_T0%,"EnablePinPad",0x00010001,0
+
+HKLM, %SmartCardName%
+HKLM, %SmartCardName%,"ATR",0x00000001,3B,00,00,00,81,31,FE,45,80,F9,A0,00,00,00,77,01,08,00,07,90,00,00
+HKLM, %SmartCardName%,"ATRMask",0x00000001,ff,00,00,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,00
+HKLM, %SmartCardName%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardName%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardName%,"80000001",0x00000000,%SmartCardCardModule%
+HKLM, %SmartCardName%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardName%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardName%,"EnablePinPad",0x00010001,0
+
+HKLM, %SmartCardNameSIBS%
+HKLM, %SmartCardNameSIBS%,"ATR",0x00000001,3B,6B,00,00,00,31,C0,64,1F,18,01,00,0F,90,00
+HKLM, %SmartCardNameSIBS%,"ATRMask",0x00000001,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF
+HKLM, %SmartCardNameSIBS%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardNameSIBS%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardNameSIBS%,"80000001",0x00000000,%SmartCardCardModule%
+HKLM, %SmartCardNameSIBS%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardNameSIBS%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardNameSIBS%,"EnablePinPad",0x00010001,0
+
+
+[AddRegDefault64]
+HKLM, %SmartCardName_T0%
+HKLM, %SmartCardName_T0%,"ATR",0x00000001,3B,5B,96,00,A0,00,00,00,77,01,08,00,07,90,00
+HKLM, %SmartCardName_T0%,"ATRMask",0x00000001,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff
+HKLM, %SmartCardName_T0%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardName_T0%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardName_T0%,"80000001",0x00000000,%SmartCardCardModule64%
+HKLM, %SmartCardName_T0%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardName_T0%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardName_T0%,"EnablePinPad",0x00010001,0
+
+
+HKLM, %SmartCardName%
+HKLM, %SmartCardName%,"ATR",0x00000001,3B,00,00,00,81,31,FE,45,80,F9,A0,00,00,00,77,01,08,00,07,90,00,00
+HKLM, %SmartCardName%,"ATRMask",0x00000001,ff,00,00,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,ff,00
+HKLM, %SmartCardName%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardName%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardName%,"80000001",0x00000000,%SmartCardCardModule64%
+HKLM, %SmartCardName%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardName%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardName%,"EnablePinPad",0x00010001,0
+
+
+HKLM, %SmartCardNameSIBS%
+HKLM, %SmartCardNameSIBS%,"ATR",0x00000001,3B,6B,00,00,00,31,C0,64,1F,18,01,00,0F,90,00
+HKLM, %SmartCardNameSIBS%,"ATRMask",0x00000001,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF,FF
+HKLM, %SmartCardNameSIBS%,"Crypto Provider",0x00000000,"Microsoft Base Smart Card Crypto Provider"
+HKLM, %SmartCardNameSIBS%,"Smart Card Key Storage Provider",0x00000000,"Microsoft Smart Card Key Storage Provider"
+HKLM, %SmartCardNameSIBS%,"80000001",0x00000000,%SmartCardCardModule64%
+HKLM, %SmartCardNameSIBS%,"AuthenticationMode",0x00010001,1
+HKLM, %SmartCardNameSIBS%,"EnableBiometric",0x00010001,0
+HKLM, %SmartCardNameSIBS%,"EnablePinPad",0x00010001,0
+
+
+[DestinationDirs]
+amd64_CopyFiles=10,system32
+x86_CopyFiles=10,system32
+wow64_CopyFiles=10,syswow64
+
+
+; =================== Generic ==================================
+
+[Strings]
+FABRIKAMVENDOR ="IDEMIA"
+MediaDescription="IDEMIA IAS-ECC Smart Card Minidriver Installation Disk"
+FabrikamCardDeviceName="IDEMIA Minidriver for IAS-ECC Smart Card"
+SmartCardName_T0="SOFTWARE\Microsoft\Cryptography\Calais\SmartCards\Oberthur Technologies IAS-ECC Device T0"
+SmartCardNameWOW64_T0="SOFTWARE\Wow6432Node\Microsoft\Cryptography\Calais\SmartCards\Oberthur Technologies IAS-ECC Device T0"
+SmartCardName="SOFTWARE\Microsoft\Cryptography\Calais\SmartCards\Oberthur Technologies IAS-ECC Device"
+SmartCardNameWOW64="SOFTWARE\Wow6432Node\Microsoft\Cryptography\Calais\SmartCards\Oberthur Technologies IAS-ECC Device"
+SmartCardNameSIBS="SOFTWARE\Microsoft\Cryptography\Calais\SmartCards\SIBS"
+SmartCardNameSIBSWOW64="SOFTWARE\Wow6432Node\Microsoft\Cryptography\Calais\SmartCards\SIBS"
+SmartCardCardModule="IasEccMiniDriver.dll"
+SmartCardCardModule64="IasEccMiniDriver64.dll"
+umpass.SVCDESC = "Microsoft UMPass Driver"
